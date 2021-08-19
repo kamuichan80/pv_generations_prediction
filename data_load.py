@@ -92,22 +92,22 @@ def load_data():
     X_4_new = X_4_new.loc['2013-01-01 01:00:00+09:00':'2020-01-01 00:00:00+09:00']
     y_4_new = y_4
 
-    X_2_new['month'] = X_2_new.index.month
-    X_2_new['day'] = X_2_new.index.day
-    X_2_new['hour'] = X_2_new.index.hour
-    X_2_new['dayofyear'] = X_2_new.index.dayofyear
-    X_3_new['month'] = X_3_new.index.month
-    X_3_new['day'] = X_3_new.index.day
-    X_3_new['hour'] = X_3_new.index.hour
-    X_3_new['dayofyear'] = X_3_new.index.dayofyear
-    X_4_new['month'] = X_4_new.index.month
-    X_4_new['day'] = X_4_new.index.day
-    X_4_new['hour'] = X_4_new.index.hour
-    X_4_new['dayofyear'] = X_4_new.index.dayofyear
+    # X_2_new['month'] = X_2_new.index.month
+    # X_2_new['day'] = X_2_new.index.day
+    # X_2_new['hour'] = X_2_new.index.hour
+    # X_2_new['dayofyear'] = X_2_new.index.dayofyear
+    # X_3_new['month'] = X_3_new.index.month
+    # X_3_new['day'] = X_3_new.index.day
+    # X_3_new['hour'] = X_3_new.index.hour
+    # X_3_new['dayofyear'] = X_3_new.index.dayofyear
+    # X_4_new['month'] = X_4_new.index.month
+    # X_4_new['day'] = X_4_new.index.day
+    # X_4_new['hour'] = X_4_new.index.hour
+    # X_4_new['dayofyear'] = X_4_new.index.dayofyear
 
-    X_2_new.loc['2016-03':'2016-12']['dayofyear'] =  X_2_new.loc['2016-03':'2016-12']['dayofyear'] - 1
-    X_3_new.loc['2016-03':'2016-12']['dayofyear'] =  X_3_new.loc['2016-03':'2016-12']['dayofyear'] - 1
-    X_4_new.loc['2016-03':'2016-12']['dayofyear'] =  X_4_new.loc['2016-03':'2016-12']['dayofyear'] - 1
+    # X_2_new.loc['2016-03':'2016-12']['dayofyear'] =  X_2_new.loc['2016-03':'2016-12']['dayofyear'] - 1
+    # X_3_new.loc['2016-03':'2016-12']['dayofyear'] =  X_3_new.loc['2016-03':'2016-12']['dayofyear'] - 1
+    # X_4_new.loc['2016-03':'2016-12']['dayofyear'] =  X_4_new.loc['2016-03':'2016-12']['dayofyear'] - 1
 
     dropThis2016 = pd.date_range(start='2016-02-29 00:00:00+09:00', end='2016-02-29 23:00+09:00', freq='H')
     X_2_renew = X_2_new.drop(dropThis2016)
