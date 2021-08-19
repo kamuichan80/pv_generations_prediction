@@ -110,9 +110,11 @@ libsodium=1.0.18=hbcb3906_1
 libssh2=1.9.0=h52ee1ee_6
 libxgboost=1.4.0=he49afe7_0
 libxml2=2.9.12=hcdb78fc_0
+libxslt=1.1.34=h83b36ba_0
 llvm-openmp=12.0.1=hda6cdc1_1
 llvm-tools=12.0.1=hd011deb_2
 llvmlite=0.35.0=py37hd32b0aa_1
+lxml=4.6.3=py37h250624f_0
 mako=1.1.4=pyh44b312d_0
 markdown=3.3.4=pyhd8ed1ab_0
 markupsafe=2.0.1=py37h271585c_0
@@ -132,7 +134,7 @@ notebook=6.4.3=pyha770c72_0
 numba=0.52.0=py37h53bd85b_0
 numexpr=2.7.1=py37h6d0141a_3
 numpy=1.16.5=py37hec87de9_1
-openssl=1.1.1k=h0d85af4_0
+openssl=1.1.1k=h0d85af4_1
 packaging=21.0=pyhd8ed1ab_0
 pandas=1.1.5=py37h010c265_0
 pandas-datareader=0.9.0=pypi_0
