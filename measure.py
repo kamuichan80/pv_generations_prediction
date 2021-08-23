@@ -40,6 +40,6 @@ def measure(strSdate: str, strEdate: str, strOrgCd: str):
     # print(df_gens.loc['2021-08-13'])
     return df_gens
 
-print(measure('20210816','20210822','876'))
-print(measure('20210816','20210822','997N'))
-print(measure('20210816','20210822','997G'))
+# print(measure('20210816','20210822','876'))
+# print(measure('20210816','20210822','997N'))
+# print(measure('20210816','20210822','997G'))
