@@ -7,11 +7,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 if __name__ == '__main__':
     df_measure_876 = measure.measure('20210816', '20210820', '876')
-    df_predict_876 = predict.predict(37.4772, 126.6249, 'Incheon', '876')
+    df_predict_876 = predict.predict(37.4772, 126.6249, 'Incheon', '876', '2021-08-16', '2021-08-20')
     # df_measure_997N = measure.measure('20210816', '20210820', '997N')
-    # df_predict_997N = predict.predict(35.10468, 129.0323, 'Busan_1', '997N')
+    # df_predict_997N = predict.predict(35.10468, 129.0323, 'Busan_1', '997N',  '2021-08-16', '2021-08-20')
     # df_measure_997G = measure.measure('20210816', '20210820', '997G')
-    # df_predict_997G = predict.predict(35.10468, 129.0323, 'Busan_2', '997G')
+    # df_predict_997G = predict.predict(35.10468, 129.0323, 'Busan_2', '997G',  '2021-08-16', '2021-08-20')
     
     plt.figure(1)
     ax_876 = df_predict_876.plot()
