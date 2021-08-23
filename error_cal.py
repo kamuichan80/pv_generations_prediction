@@ -14,15 +14,13 @@ import predict
 def error_cal(lat: str, lng: str, strSDate: str, strEDate: str, strOrgCd: str, pos_name: str, capacity: float) :
     measured = measure.measure(strSDate, strEDate, strOrgCd)
     predicted = predict.predict(lat, lng, pos_name, strOrgCd)
-    print(measured.loc[strSDate:strEDate],predicted.loc[strSDate:strEDate] )
     error = measured.loc[strSDate:strEDate] - predicted.loc[strSDate:strEDate]
     abserror = abs(error)
-    mae = np.mean(abserror)
     nmae = np.mean(abserror)/capacity
     nmae_hour = abserror.groupby(abserror.index.hour).mean()/capacity
     nmae_date = abserror.groupby(abserror.index.date).mean()/capacity
     
-    return mae, nmae, nmae_hour, nmae_date
+    return nmae, nmae_hour, nmae_date
 
 
 print(error_cal(37.4772, 126.6249, '2021-08-16', '2021-08-22', '876', 'Incheon', 200)) 
