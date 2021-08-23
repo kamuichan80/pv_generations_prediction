@@ -11,18 +11,20 @@ import datetime
 import measure
 import predict
 
-def error_cal(lat: str, lng: str, strSDate: str, strEDate: str, strOrgCd: str, pos_name: str) :
+def error_cal(lat: str, lng: str, strSDate: str, strEDate: str, strOrgCd: str, pos_name: str, capacity: float) :
     measured = measure.measure(strSDate, strEDate, strOrgCd)
     predicted = predict.predict(lat, lng, pos_name, strOrgCd)
     print(measured.loc[strSDate:strEDate],predicted.loc[strSDate:strEDate] )
     error = measured.loc[strSDate:strEDate] - predicted.loc[strSDate:strEDate]
     abserror = abs(error)
     mae = np.mean(abserror)
-    nmae = np.mean(abserror)/np.mean(measured.loc[strSDate:strEDate])
-    nmae_hour = abserror.groupby(abserror.index.hour).mean()/measured.loc[strSDate:strEDate].groupby(measured.loc[strSDate:strEDate].index.hour).mean()
-    nmae_date = abserror.groupby(abserror.index.date).mean()/measured.loc[strSDate:strEDate].groupby(measured.loc[strSDate:strEDate].index.date).mean()
+    nmae = np.mean(abserror)/capacity
+    nmae_hour = abserror.groupby(abserror.index.hour).mean()/capacity
+    nmae_date = abserror.groupby(abserror.index.date).mean()/capacity
     
     return mae, nmae, nmae_hour, nmae_date
 
 
-print(error_cal(37.4772, 126.6249, '2021-08-14', '2021-08-20', '876', 'Incheon')) 
+print(error_cal(37.4772, 126.6249, '2021-08-16', '2021-08-22', '876', 'Incheon', 200)) 
+print(error_cal(35.10468, 129.0323, '2021-08-16', '2021-08-22', '997N', 'Busan_1', 115)) 
+print(error_cal(35.10468, 129.0323, '2021-08-16', '2021-08-22', '997G', 'Busan_2', 187)) 

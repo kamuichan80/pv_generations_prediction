@@ -6,7 +6,7 @@ def model():
     return xgb
 
 if __name__ == '__main__':
-    start_time = time.time()
+    start_time = time()
     print("model make start", flush=True)
     model()
     print("model make done", flush=True)

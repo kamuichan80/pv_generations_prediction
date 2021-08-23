@@ -69,11 +69,11 @@ def load_data():
     weather_data_3 = pd.read_csv('35.10468_129.0323_Solcast_PT60M.csv', parse_dates=True, index_col='PeriodEnd')
     weather_data_4 = pd.read_csv('35.10468_129.0323_Solcast_PT60M.csv', parse_dates=True, index_col='PeriodEnd')
 
-    X_2 = weather_data_2.drop(columns=['DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking', 'AlbedoDaily'])
+    X_2 = weather_data_2.drop(columns=['AirTemp','Azimuth','DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking','Zenith', 'AlbedoDaily'])
     y_2 = pd.DataFrame(data=selected_gens_2, index=generations_data_2.index, columns=generations_data_2.columns)
-    X_3 = weather_data_3.drop(columns=['DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking', 'AlbedoDaily'])
+    X_3 = weather_data_3.drop(columns=['AirTemp','Azimuth','DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking','Zenith', 'AlbedoDaily'])
     y_3 = pd.DataFrame(data=selected_gens_3, index=generations_data_3.index, columns=generations_data_3.columns)
-    X_4 = weather_data_4.drop(columns=['DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking', 'AlbedoDaily'])
+    X_4 = weather_data_4.drop(columns=['AirTemp','Azimuth','DewpointTemp','WindSpeed10m','WindDirection10m', 'RelativeHumidity','PrecipitableWater','SnowWater','SurfacePressure', 'GtiFixedTilt','GtiTracking','Zenith', 'AlbedoDaily'])
     y_4 = pd.DataFrame(data=selected_gens_4, index=generations_data_4.index, columns=generations_data_4.columns)
 
     X_2_new = X_2
@@ -133,11 +133,10 @@ def load_data():
     # y_train3 = np.ascontiguousarray(y_train3)
     # X_train4 = np.ascontiguousarray(X_train4)
     # y_train4 = np.ascontiguousarray(y_train4)
-    
     return X_train2, y_train2, X_train3, y_train3, X_train4, y_train4, X_test2, y_test2, X_test3, y_test3, X_test4, y_test4
 
 if __name__ == '__main__':
-    start_time = time.time()
+    start_time = time()
     print("Data loaded start", flush=True)
     load_data()
     print("Data loaded done.", flush=True)

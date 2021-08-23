@@ -44,25 +44,23 @@ if __name__ == '__main__':
     abserror_xgb_3 = abs(error_xgb_3)
     abserror_xgb_4 = abs(error_xgb_4)
     
-    nmae_2 = np.mean(abserror_xgb_2)/np.mean(y_test2)
-    nmae_3 = np.mean(abserror_xgb_3)/np.mean(y_test3)
-    nmae_4 = np.mean(abserror_xgb_4)/np.mean(y_test4)
+    capacity_2 = 200
+    capacity_3 = 115
+    capacity_4 = 187
     
-    print(abserror_xgb_2.groupby(abserror_xgb_2.index.hour).mean())
-    print(abserror_xgb_3.groupby(abserror_xgb_3.index.hour).mean())
-    print(abserror_xgb_4.groupby(abserror_xgb_4.index.hour).mean())
-    # print(abserror_xgb_2.groupby(abserror_xgb_2.index.date).mean())
-    # df_y_2_pred_xgb.plot()
-    # y_test2.plot()
-    # df_y_3_pred_xgb.loc['2019-01-01'].plot()
-    # y_test3.loc['2019-01-01'].plot()
-    # plt.show()
-    # print("신인천소내 validation normailized MAE: %.5f" % nmae_2)
-    # print("부산복합자재창고 validation normailized MAE: %.5f" % nmae_3)
-    # print("부산신항 validation normailized MAE: %.5f" % nmae_4)
-    # print("신인천소내 validation normailized MAE: %.5f", abserror_xgb_2.groupby(abserror_xgb_2.index.hour).mean()/y_test2.groupby(y_test2.index.hour).mean())
-    # print("부산복합자재창고 validation normailized MAE: %.5f", np.mean(abserror_xgb_3)/np.mean(y_test3))
-    # print("부산신항 validation normailized MAE: %.5f", np.mean(abserror_xgb_4)/np.mean(y_test4))
+    nmae_2 = np.mean(abserror_xgb_2)/capacity_2
+    nmae_3 = np.mean(abserror_xgb_3)/capacity_3
+    nmae_4 = np.mean(abserror_xgb_4)/capacity_4
+    
+    print("신인천소내 validation MAE per capacity: %.5f" % nmae_2)
+    print("부산복합자재창고 validation MAE per capacity: %.5f" % nmae_3)
+    print("부산신항 validation MAE per capacity: %.5f" % nmae_4)
+    print("신인천소내 validation MAE per capacity by hour: %.5f", abserror_xgb_2.groupby(abserror_xgb_2.index.hour).mean()/capacity_2)
+    print("부산복합자재창고 validation MAE per capacity by hour: %.5f", abserror_xgb_3.groupby(abserror_xgb_3.index.hour).mean()/capacity_3)
+    print("부산신항 validation MAE per capacity by hour: %.5f", abserror_xgb_4.groupby(abserror_xgb_4.index.hour).mean()/capacity_4)
+    print("신인천소내 validation MAE per capacity by date: %.5f", abserror_xgb_2.groupby(abserror_xgb_2.index.date).mean()/capacity_2)
+    print("부산복합자재창고 validation MAE per capacity by date: %.5f", abserror_xgb_3.groupby(abserror_xgb_3.index.date).mean()/capacity_3)
+    print("부산신항 validation normailized MAE per capacity by date: %.5f", abserror_xgb_4.groupby(abserror_xgb_4.index.date).mean()/capacity_4)
     
     
     

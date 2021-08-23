@@ -32,14 +32,14 @@ def measure(strSdate: str, strEdate: str, strOrgCd: str):
     generations = pd.DataFrame(float(rows_generations[row].text) for row in range(0, len(rows_generations)))
     reshape_gen = generations.values.reshape(-1, 24)
     df_reshape_gen = pd.DataFrame(data=reshape_gen, index=df_date[0].values).sort_index(ascending=True)
-    
-    index_date = pd.date_range(start=strSdate, end=strEdate,closed='right',freq='1H',tz='Asia/Seoul')
+    time_delta = timedelta(days=1)
+    index_date = pd.date_range(start=strSdate, end=pd.to_datetime(strEdate)+time_delta,closed='right',freq='1H',tz='Asia/Seoul')
     df_gens = pd.DataFrame(data=df_reshape_gen.stack().values, index=index_date, columns=['gens'])
     df_gens.to_csv('df_gens_%s_%s.csv' % (strOrgCd,f"{datetime.now():%Y-%m-%d}"))
     # print(df_reshape_gen.stack().loc['2021-08-13'])
     # print(df_gens.loc['2021-08-13'])
     return df_gens
 
-# print(get_pv_generations('20210813','20210820','876'))
-# print(get_pv_generations('20210813','20210820','997G'))
-# print(get_pv_generations('20210813','20210820','997N'))
+print(measure('20210816','20210822','876'))
+print(measure('20210816','20210822','997N'))
+print(measure('20210816','20210822','997G'))

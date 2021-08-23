@@ -35,4 +35,6 @@ def predict(lat: float, lng: float, pos_name: str,strOrgCd: str):
     
     return df_pred
 
-# print(predict(37.4772, 126.6249, 'Incheon', '876'))
+print(predict(37.4772, 126.6249, 'Incheon', '876'))
+print(predict(35.10468, 129.0323, 'Busan_1', '997N'))
+print(predict(35.10468, 129.0323, 'Busan_2', '997G'))
