@@ -6,63 +6,38 @@ import pandas as pd
 import time
 import matplotlib.pyplot as plt
 
-X_train2, y_train2, X_train3, y_train3, X_train4, y_train4, X_test2, y_test2, X_test3, y_test3, X_test4, y_test4 = load_data()
-if __name__ == '__main__':
-    start_time = time.time()
-    model = model()
+def train(location_name: str, enddate: str, missing: bool, lat: str, lng: str, capacity: float):
+    X_train2, y_train2, X_test2, y_test2 = load_data(location_name, enddate, missing, lat, lng)
+    # start_time = time.time()
+    model_xgb = model()
     print("model loaded", flush=True)
     
-    fit_result_2 = model.fit(X_train2, y_train2)
-    fit_result_3 = model.fit(X_train3, y_train3)
-    fit_result_4 = model.fit(X_train4, y_train4)
+    fit_result_2 = model_xgb.fit(X_train2, y_train2)
     
-    joblib.dump(fit_result_2, "xgboost_Incheon.pickle")
-    joblib.dump(fit_result_3, "xgboost_Busan_1.pickle")
-    joblib.dump(fit_result_4, "xgboost_Busan_2.pickle")
+    print(fit_result_2)
+    joblib.dump(fit_result_2, "xgboost_%s.pickle" % location_name)
     
-    
-    load_2 = joblib.load('xgboost_Incheon.pickle')
-    load_3 = joblib.load('xgboost_Busan_1.pickle')
-    load_4 = joblib.load('xgboost_Busan_2.pickle')
+    load_2 = joblib.load('xgboost_%s.pickle' % location_name)
     
 
     y_2_pred_xgb = load_2.predict(X_test2).reshape(-1,1)
-    y_3_pred_xgb = load_3.predict(X_test3).reshape(-1,1)
-    y_4_pred_xgb = load_4.predict(X_test4).reshape(-1,1)
-    # y_2_pred_xgb = fit_result_2.predict(X_test2).reshape(-1,1)
-    # y_3_pred_xgb = fit_result_3.predict(X_test3).reshape(-1,1)
-    # y_4_pred_xgb = fit_result_4.predict(X_test4).reshape(-1,1)
 
     df_y_2_pred_xgb = pd.DataFrame(data=y_2_pred_xgb, index=y_test2.index, columns=y_test2.columns)
-    df_y_3_pred_xgb = pd.DataFrame(data=y_3_pred_xgb, index=y_test3.index, columns=y_test3.columns)
-    df_y_4_pred_xgb = pd.DataFrame(data=y_4_pred_xgb, index=y_test4.index, columns=y_test4.columns)
 
     error_xgb_2 = y_test2 - df_y_2_pred_xgb
-    error_xgb_3 = y_test3 - df_y_3_pred_xgb
-    error_xgb_4 = y_test4 - df_y_4_pred_xgb
     abserror_xgb_2 = abs(error_xgb_2)
-    abserror_xgb_3 = abs(error_xgb_3)
-    abserror_xgb_4 = abs(error_xgb_4)
     
-    capacity_2 = 200
-    capacity_3 = 115
-    capacity_4 = 187
+    capacity_2 = capacity
     
     nmae_2 = np.mean(abserror_xgb_2)/capacity_2
-    nmae_3 = np.mean(abserror_xgb_3)/capacity_3
-    nmae_4 = np.mean(abserror_xgb_4)/capacity_4
+    nmae_2_hour = np.mean((abserror_xgb_2.groupby(abserror_xgb_2.index.hour).mean()/capacity_2))
+    nmae_2_date = np.mean((abserror_xgb_2.groupby(abserror_xgb_2.index.date).mean()/capacity_2))
     
-    print("신인천소내 validation MAE per capacity: %.5f" % nmae_2)
-    print("부산복합자재창고 validation MAE per capacity: %.5f" % nmae_3)
-    print("부산신항 validation MAE per capacity: %.5f" % nmae_4)
-    print("신인천소내 validation MAE per capacity by hour: %.5f", abserror_xgb_2.groupby(abserror_xgb_2.index.hour).mean()/capacity_2)
-    print("부산복합자재창고 validation MAE per capacity by hour: %.5f", abserror_xgb_3.groupby(abserror_xgb_3.index.hour).mean()/capacity_3)
-    print("부산신항 validation MAE per capacity by hour: %.5f", abserror_xgb_4.groupby(abserror_xgb_4.index.hour).mean()/capacity_4)
-    print("신인천소내 validation MAE per capacity by date: %.5f", abserror_xgb_2.groupby(abserror_xgb_2.index.date).mean()/capacity_2)
-    print("부산복합자재창고 validation MAE per capacity by date: %.5f", abserror_xgb_3.groupby(abserror_xgb_3.index.date).mean()/capacity_3)
-    print("부산신항 validation normailized MAE per capacity by date: %.5f", abserror_xgb_4.groupby(abserror_xgb_4.index.date).mean()/capacity_4)
-    
-    
-    
+    print("%s validation MAE per capacity: %.5f" % (location_name,nmae_2))
+    print("%s validation MAE per capacity by hour: %.5f" % (location_name,nmae_2_hour))
+    print("%s validation MAE per capacity by date: %.5f" % (location_name,nmae_2_date))
     print("Done.", flush=True)
     
+print(train('신인천소내','20200820',True,'37.4772','126.6249', 200))
+print(train('부산복합자재창고','20200924',False,'35.10468','129.0323', 115))
+print(train('부산신항','20200820',False,'35.10468','129.0332', 187))
