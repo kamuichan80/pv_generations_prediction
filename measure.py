@@ -8,9 +8,8 @@ import re
 import numpy as np
 from datetime import datetime, timedelta
 
-xmlUrl = 'http://dataopen.kospo.co.kr/openApi/Gene/pwrGenTran'
+xmlUrl = 'http://dataopen.kospo.co.kr/openApi/Gene/PwrSunLight'
 My_API_Key = unquote('xXcVSpRYdLQ17Ah8ywRY71aNXMVNT1p5MnZu1U%2B2pbyEo0AIb1ykDMkOiYpdrXCQUuHTFVhypkLuRpd628kpaw%3D%3D')
-# My_API_Key = unquote('uAeoLlrQxF6ksUubkstds%2BXrPna5e6F5PEBWm7MiXXXMCHe%2FLZIbpGhJV5XWVnhawq7UebOw00vsBLMMNiS2SQ%3D%3D')
 
 def measure(strSDate: str, strEDate: str, strOrgCd: str):
     
